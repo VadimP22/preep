@@ -16,7 +16,7 @@ typedef struct FileNode {
 
     int match_capacity;
     int match_count;
-    MatchNode* match_nodes[];
+    MatchNode** match_nodes;
 } FileNode;
 
 FileNode* file_node_new(const char*);
@@ -33,7 +33,7 @@ typedef struct DirectoryNode {
 
     int child_file_capacity;
     int child_file_count;
-    FileNode* child_files[];
+    FileNode** child_files;
 } DirectoryNode;
 
 DirectoryNode* directory_node_new(const char*);

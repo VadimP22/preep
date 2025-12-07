@@ -2,3 +2,5 @@
 preep.exe
 .clangd
 .vscode
+*.pdb
+*.ilk
