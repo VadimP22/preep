@@ -1,5 +1,5 @@
 *.o
-preep.exe
+*.exe
 .clangd
 .vscode
 *.pdb
