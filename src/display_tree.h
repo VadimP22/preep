@@ -37,3 +37,5 @@ typedef struct DirectoryNode {
 } DirectoryNode;
 
 DirectoryNode* directory_node_new(const char*);
+void directory_node_add_file_node(DirectoryNode*, FileNode*);
+void directory_node_add_directory_node(DirectoryNode*, DirectoryNode*);

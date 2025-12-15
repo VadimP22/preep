@@ -63,3 +63,44 @@ void file_node_add_match_node(FileNode* file_node, MatchNode* match_node) {
 
     file_node->match_nodes[file_node->match_count - 1] = match_node;
 }
+
+DirectoryNode* directory_node_new(const char* dirname) {
+    DirectoryNode* new_directory_node = malloc(sizeof(DirectoryNode));
+
+    if (new_directory_node == 0)
+        exit(1);
+
+    new_directory_node->dir_name = dirname;
+    new_directory_node->match_count = 0;
+
+    new_directory_node->child_dir_capacity = 0;
+    new_directory_node->child_dir_count = 0;
+
+    new_directory_node->child_file_capacity = 0;
+    new_directory_node->child_file_count = 0;
+
+    return new_directory_node;
+}
+
+void directory_node_add_file_node(DirectoryNode* dn, FileNode* fn) {
+    assert(dn != 0);
+    assert(fn != 0);
+
+    dn->child_file_count += 1;
+
+    if (dn->child_file_count > dn->child_file_capacity) {
+        int old_capacity = dn->child_file_capacity;
+
+        if (dn->child_file_capacity == 0) {
+            dn->child_file_capacity = 1;
+        } else {
+            dn->child_dir_capacity *= 2;
+        }
+    }
+
+    // TODO
+}
+
+void directory_node_add_directory_node(DirectoryNode* dnroot, DirectoryNode* dnchild) {
+    // TODO
+}
