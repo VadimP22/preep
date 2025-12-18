@@ -49,7 +49,7 @@ void file_node_add_match_node(FileNode* file_node, MatchNode* match_node) {
             file_node->match_capacity *= 2;
         }
 
-        MatchNode** new_match_nodes = malloc(sizeof(*new_match_nodes) * file_node->match_capacity);
+        MatchNode** new_match_nodes = (MatchNode**) malloc(sizeof(*new_match_nodes) * file_node->match_capacity);
 
         assert(new_match_nodes != 0);
 
@@ -94,11 +94,24 @@ void directory_node_add_file_node(DirectoryNode* dn, FileNode* fn) {
         if (dn->child_file_capacity == 0) {
             dn->child_file_capacity = 1;
         } else {
-            dn->child_dir_capacity *= 2;
+            dn->child_file_capacity *= 2;
         }
+
+        FileNode** new_file_nodes = (FileNode**) malloc(sizeof(*new_file_nodes) * dn->child_file_capacity);
+
+        assert(new_file_nodes != 0);
+
+        if (old_capacity != 0) {
+            assert(dn->child_files != 0);
+            memcpy(new_file_nodes, dn->child_files, sizeof(FileNode*) * old_capacity);
+        }
+
+        dn->child_files = new_file_nodes;
     }
 
-    // TODO
+
+    dn->child_files[dn->child_file_count - 1] = fn;
+
 }
 
 void directory_node_add_directory_node(DirectoryNode* dnroot, DirectoryNode* dnchild) {

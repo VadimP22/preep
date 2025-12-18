@@ -19,7 +19,23 @@ void test_file_node_add_match_node() {
     assert(fn1->match_nodes[2]->line_number == 125);
 }
 
+void test_directory_node_add_file_node() {
+    DirectoryNode* dn = directory_node_new("name");
+    FileNode* fn1 = file_node_new("1");
+    FileNode* fn2 = file_node_new("2");
+    FileNode* fn3 = file_node_new("3");
+
+    directory_node_add_file_node(dn, fn1);
+    directory_node_add_file_node(dn, fn2);
+    directory_node_add_file_node(dn, fn3);
+
+    assert(dn->child_files[0]->filename[0] == '1');
+    assert(dn->child_files[1]->filename[0] == '2');
+    assert(dn->child_files[2]->filename[0] == '3');
+}
+
 int main() {
     test_file_node_add_match_node();
+    test_directory_node_add_file_node();
     return 0;
 }
