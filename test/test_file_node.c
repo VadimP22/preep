@@ -34,8 +34,24 @@ void test_directory_node_add_file_node() {
     assert(dn->child_files[2]->filename[0] == '3');
 }
 
+void test_directory_node_add_directory_node() {
+    DirectoryNode* dn = directory_node_new("name");
+    DirectoryNode* dn1 = directory_node_new("a");
+    DirectoryNode* dn2 = directory_node_new("b");
+    DirectoryNode* dn3 = directory_node_new("c");
+
+    directory_node_add_directory_node(dn, dn1);
+    directory_node_add_directory_node(dn, dn2);
+    directory_node_add_directory_node(dn, dn3);
+
+    assert(dn->child_dirs[0]->dir_name[0] == 'a');
+    assert(dn->child_dirs[1]->dir_name[0] == 'b');
+    assert(dn->child_dirs[2]->dir_name[0] == 'c');
+}
+
 int main() {
     test_file_node_add_match_node();
     test_directory_node_add_file_node();
+    test_directory_node_add_directory_node();
     return 0;
 }

@@ -115,5 +115,32 @@ void directory_node_add_file_node(DirectoryNode* dn, FileNode* fn) {
 }
 
 void directory_node_add_directory_node(DirectoryNode* dnroot, DirectoryNode* dnchild) {
-    // TODO
+    assert(dnroot != 0);
+    assert(dnchild != 0);
+
+    dnroot->child_dir_count += 1;
+
+    if (dnroot->child_dir_count > dnroot->child_dir_capacity) {
+        int old_capacity = dnroot->child_dir_capacity;
+
+        if (dnroot->child_dir_capacity == 0) {
+            dnroot->child_dir_capacity = 1;
+        } else {
+            dnroot->child_dir_capacity *= 2;
+        }
+
+        DirectoryNode** new_direcotry_nodes = (DirectoryNode**) malloc(sizeof(*new_direcotry_nodes) * dnroot->child_dir_capacity);
+
+        assert(new_direcotry_nodes != 0);
+
+        if (old_capacity != 0) {
+            assert(dnroot->child_dirs != 0);
+            memcpy(new_direcotry_nodes, dnroot->child_dirs, sizeof(DirectoryNode*) * old_capacity);
+        }
+
+        dnroot->child_dirs = new_direcotry_nodes;
+    }
+
+
+    dnroot->child_dirs[dnroot->child_dir_count - 1] = dnchild;
 }

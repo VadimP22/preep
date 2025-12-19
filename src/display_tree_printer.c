@@ -2,6 +2,15 @@
 
 #include "stdio.h"
 
+DisplayTreePrinter* new_display_tree_printer() {
+    DisplayTreePrinter* new_display_tree_printer = malloc(sizeof(DisplayTreePrinter));
+    
+    if (new_display_tree_printer == 0)
+        exit(1);
+
+    return new_display_tree_printer;
+}
+
 void match_node_print(MatchNode *self) {
     printf("%d:", self->line_number);  
 
