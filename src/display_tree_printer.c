@@ -1,6 +1,7 @@
 #include "display_tree_printer.h"
 
 #include "stdio.h"
+#include <stdlib.h>
 
 DisplayTreePrinter* new_display_tree_printer() {
     DisplayTreePrinter* new_display_tree_printer = malloc(sizeof(DisplayTreePrinter));
